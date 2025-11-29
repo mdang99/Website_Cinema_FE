@@ -5,7 +5,8 @@ import {
   authGetMe,
   authLogin,
   authRefreshToken,
-  authSignup
+  authSignup,
+  authChangePassword,
 } from "@/services/authApi";
 
 const AuthContext = createContext(undefined);
@@ -38,9 +39,9 @@ export function AuthProvider({ children }) {
       const me = await authGetMe(token);
       setUser(me);
     } catch (e) {
-        if (e.status === 401) {
-            logout();   // xóa token + user
-        }
+      if (e.status === 401) {
+        logout(); // xóa token + user
+      }
       // thử refresh token một lần
       try {
         const data = await authRefreshToken();
@@ -91,7 +92,25 @@ export function AuthProvider({ children }) {
       setLoading(false);
     }
   }
+  async function changePassword(payload) {
+    if (!accessToken) throw new Error("Bạn chưa đăng nhập");
+    setLoading(true);
+    try {
+      const data = await authChangePassword(accessToken, payload);
+      // Nếu API trả về token mới
+      if (data?.accessToken) {
+        setAccessToken(data.accessToken);
+        setUser(data.user);
+        if (typeof window !== "undefined") {
+          window.localStorage.setItem(ACCESS_TOKEN_KEY, data.accessToken);
+        }
+      }
 
+      return data;
+    } finally {
+      setLoading(false);
+    }
+  }
   function logout() {
     setUser(null);
     setAccessToken(null);
@@ -100,7 +119,15 @@ export function AuthProvider({ children }) {
     }
   }
 
-  const value = { user, accessToken, loading, login, signup, logout };
+  const value = {
+    user,
+    accessToken,
+    loading,
+    login,
+    signup,
+    logout,
+    changePassword,
+  };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

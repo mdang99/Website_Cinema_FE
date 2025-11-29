@@ -2,8 +2,10 @@
 "use client";
 
 import { useAuth } from "@/context/AuthContext";
+
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { validateSignup } from "../../../utils/validateSignup";
 
 export default function SignupPage() {
   const { user, signup, loading } = useAuth();
@@ -20,8 +22,15 @@ export default function SignupPage() {
   async function handleSubmit(e) {
     e.preventDefault();
     setError("");
+
+    const errorMessage = validateSignup(form);
+    if (errorMessage) {
+      setError(errorMessage);
+      return;
+    }
+
     try {
-      await signup(form); // { name, email, password }
+      await signup(form);
       router.replace("/");
     } catch (err) {
       setError(err.message || "Đăng ký thất bại");
@@ -31,7 +40,9 @@ export default function SignupPage() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-black via-dark to-black">
       <div className="w-full max-w-md rounded-2xl bg-black/70 p-8 shadow-2xl">
-        <h1 className="mb-6 text-center text-2xl font-bold">Đăng ký tài khoản</h1>
+        <h1 className="mb-6 text-center text-2xl font-bold">
+          Đăng ký tài khoản
+        </h1>
 
         {error && (
           <div className="mb-4 rounded bg-red-500/20 px-3 py-2 text-sm text-red-300">

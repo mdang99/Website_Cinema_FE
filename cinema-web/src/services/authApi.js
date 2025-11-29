@@ -60,7 +60,7 @@ export async function authChangePassword(accessToken, payload) {
     method: "PUT",
     headers: {
       ...jsonHeaders,
-      Authorization: `Bearer ${accessToken}`
+      Authorization: `Bearer ${accessToken}`,
     },
     body: JSON.stringify(payload),
   });

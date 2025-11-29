@@ -21,7 +21,7 @@ async function handleJson(res) {
 export async function getProfile(accessToken) {
   const res = await fetch(`${API_BASE_URL}/api/users/me`, {
     headers: {
-      Authorization: `Bearer ${accessToken}`
+      Authorization: `Bearer ${accessToken}`,
     },
   });
   return handleJson(res); // user
@@ -32,7 +32,7 @@ export async function updateProfile(accessToken, payload) {
     method: "PUT",
     headers: {
       ...jsonHeaders,
-      Authorization: `Bearer ${accessToken}`
+      Authorization: `Bearer ${accessToken}`,
     },
     body: JSON.stringify(payload),
   });
@@ -44,9 +44,10 @@ export async function updatePreferences(accessToken, payload) {
     method: "PUT",
     headers: {
       ...jsonHeaders,
-      Authorization: `Bearer ${accessToken}`
+      Authorization: `Bearer ${accessToken}`,
     },
     body: JSON.stringify(payload),
   });
   return handleJson(res);
 }
+
