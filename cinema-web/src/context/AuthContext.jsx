@@ -7,6 +7,8 @@ import {
   authRefreshToken,
   authSignup,
   authChangePassword,
+  authForgotPassword,
+  authResetPassword,
 } from "@/services/authApi";
 
 const AuthContext = createContext(undefined);
@@ -111,6 +113,24 @@ export function AuthProvider({ children }) {
       setLoading(false);
     }
   }
+  // Gửi email quên mật khẩu
+  async function forgotPassword(email) {
+    setLoading(true);
+    try {
+      await authForgotPassword({ email });
+    } finally {
+      setLoading(false);
+    }
+  }
+  async function resetPassword(payload) {
+    // payload: { token, newPassword }
+    setLoading(true);
+    try {
+      await authResetPassword(payload);
+    } finally {
+      setLoading(false);
+    }
+  }
   function logout() {
     setUser(null);
     setAccessToken(null);
@@ -127,6 +147,8 @@ export function AuthProvider({ children }) {
     signup,
     logout,
     changePassword,
+    forgotPassword,
+    resetPassword,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -1,40 +1,44 @@
-// src/app/signup/page.jsx
 "use client";
 
+import { useSearchParams, useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
+import { validateResetPassword } from "../../../utils/validateResetPassword";
 
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { validateChangePassword } from "../../../utils/validateChangePassWord";
-
-export default function SignupPage() {
-  const { user, changePassword, loading } = useAuth();
+export default function ResetPasswordPage() {
   const router = useRouter();
-  const [form, setForm] = useState({ oldPassword: "", newPassword: "" });
+  const searchParams = useSearchParams();
+  const token = searchParams.get("token");
+
+  const { resetPassword, loading } = useAuth();
+  const [newPassword, setNewPassword] = useState("");
   const [error, setError] = useState("");
 
   useEffect(() => {
-    if (!loading && !user) {
-      router.replace("/");
+    if (!token) {
+      router.replace("/login");
     }
-  }, [user, loading, router]);
+  }, [token, router]);
 
   async function handleSubmit(e) {
     e.preventDefault();
     setError("");
 
-    const errorMessage = validateChangePassword(form);
-    if (errorMessage) {
-      setError(errorMessage);
+    const msg = validateResetPassword(newPassword);
+    if (msg) {
+      setError(msg);
       return;
     }
 
     try {
-      await changePassword(form);
-      I;
-      router.replace("/");
+      await resetPassword({
+        token,
+        newPassword,
+      });
+
+      router.replace("/login");
     } catch (err) {
-      setError(err.message || "Mật khẩu cũ không đúng");
+      setError(err.message || "Reset mật khẩu thất bại");
     }
   }
 
@@ -53,27 +57,12 @@ export default function SignupPage() {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="mb-1 block text-sm">Mật khẩu cũ</label>
-            <input
-              type="password"
-              className="w-full rounded bg-white/5 px-3 py-2 text-sm outline-none ring-1 ring-white/10 focus:ring-primary"
-              value={form.oldPassword}
-              onChange={(e) =>
-                setForm({ ...form, oldPassword: e.target.value })
-              }
-              required
-            />
-          </div>
-
-          <div>
             <label className="mb-1 block text-sm">Mật khẩu mới</label>
             <input
               type="password"
               className="w-full rounded bg-white/5 px-3 py-2 text-sm outline-none ring-1 ring-white/10 focus:ring-primary"
-              value={form.newPassword}
-              onChange={(e) =>
-                setForm({ ...form, newPassword: e.target.value })
-              }
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
               required
             />
           </div>
@@ -83,7 +72,7 @@ export default function SignupPage() {
             disabled={loading}
             className="mt-2 w-full rounded bg-primary py-2 text-sm font-semibold disabled:opacity-70"
           >
-            {loading ? "Đang xử lý..." : "Đổi mật khẩu"}
+            {loading ? "Đang xử lý..." : "Đặt lại mật khẩu"}
           </button>
         </form>
       </div>
