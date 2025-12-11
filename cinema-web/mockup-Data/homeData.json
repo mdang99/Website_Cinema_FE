@@ -1357,6 +1357,364 @@
       "description": "Phần 7 của series hành động đình đám Lật Mặt với những bí mật chưa từng được tiết lộ.",
       "year": 2019
     }
+  ],
+  "countryList" : [
+  {
+    "id": 1,
+    "name": "Anh",
+    "code": "GB",
+    "slug": "anh"
+  },
+  {
+    "id": 2,
+    "name": "Canada",
+    "code": "CA",
+    "slug": "canada"
+  },
+  {
+    "id": 3,
+    "name": "Hàn Quốc",
+    "code": "KR",
+    "slug": "han-quoc"
+  },
+  {
+    "id": 4,
+    "name": "Hồng Kông",
+    "code": "HK",
+    "slug": "hong-kong"
+  },
+  {
+    "id": 5,
+    "name": "Mỹ",
+    "code": "US",
+    "slug": "my"
+  },
+  {
+    "id": 6,
+    "name": "Nhật Bản",
+    "code": "JP",
+    "slug": "nhat-ban"
+  },
+  {
+    "id": 7,
+    "name": "Pháp",
+    "code": "FR",
+    "slug": "phap"
+  },
+  {
+    "id": 8,
+    "name": "Thái Lan",
+    "code": "TH",
+    "slug": "thai-lan"
+  },
+  {
+    "id": 9,
+    "name": "Trung Quốc",
+    "code": "CN",
+    "slug": "trung-quoc"
+  },
+  {
+    "id": 10,
+    "name": "Úc",
+    "code": "AU",
+    "slug": "uc"
+  },
+  {
+    "id": 11,
+    "name": "Đài Loan",
+    "code": "TW",
+    "slug": "dai-loan"
+  },
+  {
+    "id": 12,
+    "name": "Đức",
+    "code": "DE",
+    "slug": "duc"
+  }
+],
+
+  "categories": [
+    {
+      "id": 1,
+      "name": "Anime",
+      "slug": "anime"
+    },
+    {
+      "id": 2,
+      "name": "Bí Ẩn",
+      "slug": "bi-an"
+    },
+    {
+      "id": 3,
+      "name": "Chiến Tranh",
+      "slug": "chien-tranh"
+    },
+    {
+      "id": 4,
+      "name": "Chiếu Rạp",
+      "slug": "chieu-rap"
+    },
+    {
+      "id": 5,
+      "name": "Chuyển Thể",
+      "slug": "chuyen-the"
+    },
+    {
+      "id": 6,
+      "name": "Chính Kịch",
+      "slug": "chinh-kich"
+    },
+    {
+      "id": 7,
+      "name": "Chính Luận",
+      "slug": "chinh-luan"
+    },
+    {
+      "id": 8,
+      "name": "Chính Trị",
+      "slug": "chinh-tri"
+    },
+    {
+      "id": 9,
+      "name": "Chương Trình Truyền Hình",
+      "slug": "chuong-trinh-truyen-hinh"
+    },
+    {
+      "id": 10,
+      "name": "Concert Film",
+      "slug": "concert-film"
+    },
+    {
+      "id": 11,
+      "name": "Cung Đấu",
+      "slug": "cung-dau"
+    },
+    {
+      "id": 12,
+      "name": "Cuối Tuần",
+      "slug": "cuoi-tuan"
+    },
+    {
+      "id": 13,
+      "name": "Cách Mạng",
+      "slug": "cach-mang"
+    },
+    {
+      "id": 14,
+      "name": "Cổ Trang",
+      "slug": "co-trang"
+    },
+    {
+      "id": 15,
+      "name": "Cổ Tích",
+      "slug": "co-tich"
+    },
+    {
+      "id": 16,
+      "name": "Cổ Điển",
+      "slug": "co-dien"
+    },
+    {
+      "id": 17,
+      "name": "DC",
+      "slug": "dc"
+    },
+    {
+      "id": 18,
+      "name": "Disney",
+      "slug": "disney"
+    },
+    {
+      "id": 19,
+      "name": "Gay Cấn",
+      "slug": "gay-can"
+    },
+    {
+      "id": 20,
+      "name": "Gia Đình",
+      "slug": "gia-dinh"
+    },
+    {
+      "id": 21,
+      "name": "Giáng Sinh",
+      "slug": "giang-sinh"
+    },
+    {
+      "id": 22,
+      "name": "Giả Tưởng",
+      "slug": "gia-tuong"
+    },
+    {
+      "id": 23,
+      "name": "Hoàng Cung",
+      "slug": "hoang-cung"
+    },
+    {
+      "id": 24,
+      "name": "Hoạt Hình",
+      "slug": "hoat-hinh"
+    },
+    {
+      "id": 25,
+      "name": "Hài",
+      "slug": "hai"
+    },
+    {
+      "id": 26,
+      "name": "Hành Động",
+      "slug": "hanh-dong"
+    },
+    {
+      "id": 27,
+      "name": "Hình Sự",
+      "slug": "hinh-su"
+    },
+    {
+      "id": 28,
+      "name": "Học Đường",
+      "slug": "hoc-duong"
+    },
+    {
+      "id": 29,
+      "name": "Khoa Học",
+      "slug": "khoa-hoc"
+    },
+    {
+      "id": 30,
+      "name": "Kinh Dị",
+      "slug": "kinh-di"
+    },
+    {
+      "id": 31,
+      "name": "Kinh Điển",
+      "slug": "kinh-dien"
+    },
+    {
+      "id": 32,
+      "name": "Kịch Nói",
+      "slug": "kich-noi"
+    },
+    {
+      "id": 33,
+      "name": "Kỳ Ảo",
+      "slug": "ky-ao"
+    },
+    {
+      "id": 34,
+      "name": "LGBT+",
+      "slug": "lgbt"
+    },
+    {
+      "id": 35,
+      "name": "Live Action",
+      "slug": "live-action"
+    },
+    {
+      "id": 36,
+      "name": "Lãng Mạn",
+      "slug": "lang-man"
+    },
+    {
+      "id": 37,
+      "name": "Lịch Sử",
+      "slug": "lich-su"
+    },
+    {
+      "id": 38,
+      "name": "Marvel",
+      "slug": "marvel"
+    },
+    {
+      "id": 39,
+      "name": "Miền Viễn Tây",
+      "slug": "mien-vien-tay"
+    },
+    {
+      "id": 40,
+      "name": "Nghề Nghiệp",
+      "slug": "nghe-nghiep"
+    },
+    {
+      "id": 41,
+      "name": "Người Mẫu",
+      "slug": "nguoi-mau"
+    },
+    {
+      "id": 42,
+      "name": "Nhạc Kịch",
+      "slug": "nhac-kich"
+    },
+    {
+      "id": 43,
+      "name": "Phiêu Lưu",
+      "slug": "phieu-luu"
+    },
+    {
+      "id": 44,
+      "name": "Phép Thuật",
+      "slug": "phep-thuat"
+    },
+    {
+      "id": 45,
+      "name": "Siêu Anh Hùng",
+      "slug": "sieu-anh-hung"
+    },
+    {
+      "id": 46,
+      "name": "Thiếu Nhi",
+      "slug": "thieu-nhi"
+    },
+    {
+      "id": 47,
+      "name": "Thần Thoại",
+      "slug": "than-thoai"
+    },
+    {
+      "id": 48,
+      "name": "Thể Thao",
+      "slug": "the-thao"
+    },
+    {
+      "id": 49,
+      "name": "Truyền Hình Thực Tế",
+      "slug": "truyen-hinh-thuc-te"
+    },
+    {
+      "id": 50,
+      "name": "Tuổi Trẻ",
+      "slug": "tuoi-tre"
+    },
+    {
+      "id": 51,
+      "name": "Tài Liệu",
+      "slug": "tai-lieu"
+    },
+    {
+      "id": 52,
+      "name": "Tâm Lý",
+      "slug": "tam-ly"
+    },
+    {
+      "id": 53,
+      "name": "Tình Cảm",
+      "slug": "tinh-cam"
+    },
+    {
+      "id": 54,
+      "name": "Tập Luyện",
+      "slug": "tap-luyen"
+    },
+    {
+      "id": 55,
+      "name": "Viễn Tưởng",
+      "slug": "vien-tuong"
+    },
+    {
+      "id": 56,
+      "name": "Võ Thuật",
+      "slug": "vo-thuat"
+    }
   ]
+
 
 }

@@ -1,7 +1,5 @@
 "use client"
 import homeData from "../../mockup-Data/homeData.json";
-
-
 import { useEffect, useState } from "react";
 import  "./page.module.css";
 import MovieCardsClip from "@/components/home/SoonMovies";
