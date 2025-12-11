@@ -19,7 +19,7 @@ export default function Navbar() {
   }
 
   return (
-    <div className="sticky top-0 z-30 bg-black/70 backdrop-blur-lg">
+    <div className="sticky top-0 z-30  backdrop-blur-lg">
       <div className="container mx-auto flex items-center justify-between py-4 px-4">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
