@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
       <body className="bg-gradient-to-b from-black via-dark to-black text-white">
         <AuthProvider>
           <Navbar />
-          <main className="mx-auto px-4 py-6">{children}</main>
+          <main className="mx-auto px-[20px] py-6">{children}</main>
           <Footer />
         </AuthProvider>
       </body>

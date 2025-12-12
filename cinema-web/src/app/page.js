@@ -34,19 +34,19 @@ export default function HomePage() {
       <section className="hero-banner">
         <HeroBannerLayout movies={homeData.comingSoon || []} />
       </section>
-       <section className="movies-USA">
+       <section className="movies-USA w-full">
         <MoviesCateLayout 
           catId="Phim Mỹ" 
           movies={homeData.moviesByCountry.usa || []}
         />
       </section>
-       <section className="movies-Korea">
+       <section className="movies-Korea w-full">
         <MoviesCateLayout 
           catId="Phim Hàn" 
           movies={homeData.moviesByCountry.korea || []}
         />
       </section>
-      <section className="movies-China">
+      <section className="movies-China w-full">
         <MoviesCateLayout 
           catId="Phim TQ" 
           movies={homeData.moviesByCountry.china || []}

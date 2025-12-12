@@ -53,7 +53,7 @@ export default function CardMovies() {
 
         {/* Hover Popup */}
         <div
-          className={`absolute top-0 left-1/2 -translate-x-1/2 w-[120%] bg-gray-900 rounded-2xl shadow-2xl z-50 transition-all duration-300 ${
+          className={`absolute top-0 left-0 w-[120%] bg-gray-900 rounded-2xl shadow-2xl z-50 transition-all duration-300 ${
             isHovered
               ? "opacity-100 -translate-y-4"
               : "opacity-0 translate-y-0 pointer-events-none"
