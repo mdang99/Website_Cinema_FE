@@ -58,7 +58,7 @@ export default function HomePage() {
           catId="Phim Mới" 
           movies={homeData.comingSoon || []}
         />
-        <MovieCardsClip />
+        <MovieCardsClip movies={homeData.comingSoon || []}/>
       </section>
   </>
   );

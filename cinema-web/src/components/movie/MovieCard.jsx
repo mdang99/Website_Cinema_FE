@@ -1,57 +1,87 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-export default function CardMovies() {
+export default function MovieCard({ movie, disableHover = false }) {
   const [isHovered, setIsHovered] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  // Detect desktop viewport
+  useEffect(() => {
+    const checkViewport = () => {
+      setIsDesktop(window.innerWidth >= 1024);
+    };
+
+    checkViewport();
+    window.addEventListener("resize", checkViewport);
+    return () => window.removeEventListener("resize", checkViewport);
+  }, []);
+
+  // Only allow hover on desktop
+  const handleMouseEnter = () => {
+    if (isDesktop && !disableHover) {
+      setIsHovered(true);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
 
   return (
-    <>
-      {/* Card 1 */}
+    <div
+      className="relative group w-full h-full"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      {/* Normal Card View */}
       <div
-        className="relative group"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        style={{ width: "200px", height: "300px" }}
+        className={`transition-opacity duration-300 ${
+          isHovered ? "opacity-0 pointer-events-none" : "opacity-100"
+        }`}
       >
-        {/* Normal Card View */}
-        <div
-          className={`transition-opacity duration-300 ${
-            isHovered ? "opacity-0 pointer-events-none" : "opacity-100"
-          }`}
-        >
-          <a href="/phim/nhoc-trum-noi-nghiep-gia-dinh" className="block">
-            <div className="relative rounded-2xl overflow-hidden shadow-lg">
-              <img
-                src="https://placehold.co/300x400/e1e1e1/333?text=Boss+Baby"
-                alt="Nhóc Trùm"
-                className="w-full h-auto aspect-[3/4] object-cover"
-              />
+        <a href={`/phim/${movie.slug}`} className="block">
+          <div className="relative rounded-2xl overflow-hidden shadow-lg">
+            <img
+              src={
+                movie.poster ||
+                "https://placehold.co/300x400/e1e1e1/333?text=Movie"
+              }
+              alt={movie.name}
+              className="w-full h-auto aspect-[2/3] object-cover"
+            />
 
-              {/* Badges */}
-              <div className="absolute bottom-3 left-0 right-0 flex justify-center z-10">
+            {/* Badges */}
+            <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-2 z-10">
+              {movie.quality && (
                 <div className="px-3 py-1 rounded-md text-xs font-semibold text-white bg-gray-800">
-                  P.Đề
+                  {movie.quality}
                 </div>
+              )}
+              {movie.lang && (
                 <div className="px-3 py-1 rounded-md text-xs font-semibold text-white bg-blue-600">
-                  L.Tiếng
+                  {movie.lang}
                 </div>
+              )}
+              {movie.subtitle && (
                 <div className="px-3 py-1 rounded-md text-xs font-semibold text-white bg-green-600">
                   T.Minh
                 </div>
-              </div>
+              )}
             </div>
+          </div>
 
-            <div className="mt-3 px-1">
-              <h4 className="font-semibold text-sm text-white line-clamp-1">
-                Nhóc Trùm: Nổi Nghiệp Gia Đình
-              </h4>
-              <h4 className="text-xs text-gray-400 line-clamp-1 mt-1">
-                The Boss Baby: Family Business
-              </h4>
-            </div>
-          </a>
-        </div>
+          <div className="mt-3 px-1">
+            <h4 className="font-semibold text-sm text-white line-clamp-1">
+              {movie.name}
+            </h4>
+            <h4 className="text-xs text-gray-400 line-clamp-1 mt-1">
+              {movie.originName}
+            </h4>
+          </div>
+        </a>
+      </div>
 
-        {/* Hover Popup */}
+      {/* Hover Popup - Only on Desktop */}
+      {isDesktop && !disableHover && (
         <div
           className={`absolute top-0 left-0 w-[120%] bg-gray-900 rounded-2xl shadow-2xl z-50 transition-all duration-300 ${
             isHovered
@@ -63,19 +93,36 @@ export default function CardMovies() {
           {/* Trailer/Poster */}
           <div className="relative rounded-t-2xl overflow-hidden">
             <img
-              src="https://placehold.co/600x400/1a1a1a/fff?text=Trailer+Video"
+              src={
+                movie.thumbUrl ||
+                movie.poster ||
+                "https://placehold.co/600x400/1a1a1a/fff?text=Trailer"
+              }
               alt="Trailer"
               className="w-full h-auto aspect-[16/9] object-cover"
             />
+
+            {/* Play Icon Overlay */}
+            <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+              <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                <svg
+                  className="w-8 h-8 text-white ml-1"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
+                </svg>
+              </div>
+            </div>
           </div>
 
           {/* Content */}
           <div className="p-5">
-            <h3 className="font-bold text-white text-lg mb-1">
-              Nhóc Trùm: Nổi Nghiệp Gia Đình
+            <h3 className="font-bold text-white text-lg mb-1 line-clamp-2">
+              {movie.name}
             </h3>
-            <p className="text-yellow-500 text-sm mb-4">
-              The Boss Baby: Family Business
+            <p className="text-yellow-500 text-sm mb-4 line-clamp-1">
+              {movie.originName}
             </p>
 
             {/* Action Buttons */}
@@ -115,31 +162,40 @@ export default function CardMovies() {
             </div>
 
             {/* Movie Info */}
-            <div className="flex items-center gap-3 mb-3 text-sm">
-              <div className="flex items-center gap-1.5 border border-yellow-500 text-yellow-500 px-2 py-1 rounded">
-                <span className="font-semibold">IMDb</span>
-                <span>5.9</span>
-              </div>
-              <div className="bg-white text-black font-bold px-2 py-1 rounded">
-                T13
-              </div>
-              <span className="text-gray-400">2021</span>
-              <span className="text-gray-400">1h 47m</span>
+            <div className="flex items-center gap-3 mb-3 text-sm flex-wrap">
+              {movie.imdbRating && (
+                <div className="flex items-center gap-1.5 border border-yellow-500 text-yellow-500 px-2 py-1 rounded">
+                  <span className="font-semibold">IMDb</span>
+                  <span>{movie.imdbRating}</span>
+                </div>
+              )}
+              {movie.ageRating && (
+                <div className="bg-white text-black font-bold px-2 py-1 rounded">
+                  {movie.ageRating}
+                </div>
+              )}
+              {movie.year && (
+                <span className="text-gray-400">{movie.year}</span>
+              )}
+              {movie.time && (
+                <span className="text-gray-400">{movie.time}</span>
+              )}
             </div>
 
             {/* Genres */}
-            <div className="flex flex-wrap gap-2 text-xs text-gray-300">
-              <span>Chiếu Rạp</span>
-              <span>•</span>
-              <span>Gay Cấn</span>
-              <span>•</span>
-              <span>Gia Đình</span>
-              <span>•</span>
-              <span>Thiếu Nhi</span>
-            </div>
+            {movie.genres && movie.genres.length > 0 && (
+              <div className="flex flex-wrap gap-2 text-xs text-gray-300">
+                {movie.genres.slice(0, 4).map((genre, index) => (
+                  <span key={index}>
+                    {genre.name}
+                    {index < Math.min(movie.genres.length, 4) - 1 && " • "}
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
         </div>
-      </div>
-    </>
+      )}
+    </div>
   );
 }

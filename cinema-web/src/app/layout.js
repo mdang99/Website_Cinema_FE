@@ -4,6 +4,7 @@ import "./globals.css";
 import Footer from "@/components/layout/Footer";
 import { AuthProvider } from "@/context/AuthContext";
 import Navbar from "@/components/layout/Navbar";
+import ScrollToTop from "@/components/layout/ScrollToTop";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,6 +30,7 @@ export default function RootLayout({ children }) {
           <Navbar />
           <main className="mx-auto px-[20px] py-6">{children}</main>
           <Footer />
+          <ScrollToTop className="fixed bottom-6 right-6" />
         </AuthProvider>
       </body>
     </html>
