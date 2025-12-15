@@ -1,3 +1,5 @@
+import MovieCard from "./MovieCard";
+
 function MovieCardDemo() {
   const movies = [
     {
@@ -34,7 +36,7 @@ function MovieCardDemo() {
         <h2 className="text-white text-2xl font-bold mb-6">Phim Đề Xuất</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
           {movies.map((movie, idx) => (
-            <CardMovies key={idx} movie={movie} />
+            <MovieCard key={idx} movie={movie} />
           ))}
         </div>
       </div>
