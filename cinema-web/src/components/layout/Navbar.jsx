@@ -17,6 +17,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { useState, useEffect } from "react";
+import moviesListData from "../../../mockup-Data/moviesListData.json";
+import SearchBox from "@/components/search/SearchBox";
 
 library.add(
   faAngleDown,
@@ -123,19 +125,7 @@ export default function Navbar() {
 
             {/* Search Bar */}
             <div className="relative w-full lg:w-64">
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-                placeholder="Tìm kiếm phim..."
-                className="w-full rounded-xl bg-white/5 border border-gray-800/50 px-4 py-2.5 lg:py-2.5 pl-11 text-sm text-white placeholder:text-gray-500 focus:border-red-600/50 focus:bg-white/10 focus:ring-2 focus:ring-red-600/20 outline-none transition-all"
-              />
-              <FontAwesomeIcon
-                icon={faMagnifyingGlass}
-                className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 w-4 h-4 cursor-pointer hover:text-red-600 transition-colors"
-                onClick={handleSearch}
-              />
+              <SearchBox movies={moviesListData.movies} />
             </div>
 
             {/* Navigation */}

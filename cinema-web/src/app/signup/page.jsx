@@ -6,6 +6,9 @@ import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { validateSignup } from "../../../utils/validateSignup";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import Link from "next/link";
 
 export default function SignupPage() {
   const { user, signup, loading } = useAuth();
@@ -38,7 +41,22 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-black via-dark to-black">
+    <div className="flex flex-col min-h-screen items-center justify-center bg-gradient-to-b from-black via-dark to-black">
+      <div>
+        {" "}
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-2 lg:gap-3 group">
+          <div className="relative">
+            <span className="flex h-10 w-10 lg:h-12 lg:w-12 items-center justify-center rounded-xl bg-gradient-to-br from-red-600 to-red-700 text-xl lg:text-2xl font-black text-white shadow-lg shadow-red-600/30 group-hover:shadow-red-600/50 transition-all group-hover:scale-105">
+              C
+            </span>
+            <div className="absolute -inset-1 bg-gradient-to-r from-red-600 to-pink-600 rounded-xl opacity-0 group-hover:opacity-30 blur transition-opacity" />
+          </div>
+          <span className="hidden sm:block text-xl lg:text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+            Cinema
+          </span>
+        </Link>
+      </div>
       <div className="w-full max-w-md rounded-2xl bg-black/70 p-8 shadow-2xl">
         <h1 className="mb-6 text-center text-2xl font-bold">
           Đăng ký tài khoản
@@ -91,6 +109,24 @@ export default function SignupPage() {
             {loading ? "Đang xử lý..." : "Đăng ký"}
           </button>
         </form>
+        <div className="mt-4 text-center">
+          <span className="text-sm text-gray-400">Or</span>
+        </div>
+        <div className="mt-4 text-center flex justify-center gap-4">
+          {" "}
+          <a
+            href="/signup"
+            className="block w-[100%] bg-gray-800 p-2 rounded hover:bg-gray-700-text hover:text-white text-sm text-red-500"
+          >
+            <FontAwesomeIcon icon={faGoogle} /> Đăng Ký với Google
+          </a>
+        </div>
+        <div className="mt-4 text-center">
+          <span className="text-sm text-gray-400">Bạn đã có tài khoản? </span>
+          <a href="/login" className="text-sm text-red-500 hover:underline">
+            Đăng nhập ngay
+          </a>
+        </div>
       </div>
     </div>
   );
