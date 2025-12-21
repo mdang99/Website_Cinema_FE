@@ -1,47 +1,86 @@
-import MovieCard from "./MovieCard";
+"use client";
 
-function MovieCardDemo() {
-  const movies = [
-    {
-      slug: "nhoc-trum-noi-nghiep-gia-dinh",
-      title: "Nhóc Trùm: Nổi Nghiệp Gia Đình",
-      originalTitle: "The Boss Baby: Family Business",
-      poster: "https://placehold.co/300x400/e1e1e1/333?text=Boss+Baby",
-      trailer: "https://placehold.co/600x400/1a1a1a/fff?text=Trailer",
-      badges: ["P.Đề", "L.Tiếng", "T.Minh"],
-      imdb: "5.9",
-      rating: "T13",
-      year: "2021",
-      duration: "1h 47m",
-      genres: ["Chiếu Rạp", "Gay Cấn", "Gia Đình", "Thiếu Nhi"],
-    },
-    {
-      slug: "zui-du-chua",
-      title: "Zui Dữ Chưa?",
-      originalTitle: "Oh. What. Fun.",
-      poster: "https://placehold.co/300x400/d4d4d4/333?text=Oh+What+Fun",
-      trailer: "https://placehold.co/600x400/1a1a1a/fff?text=Trailer",
-      badges: ["P.Đề"],
-      imdb: "6.2",
-      rating: "T16",
-      year: "2024",
-      duration: "2h 05m",
-      genres: ["Hành Động", "Hài Hước", "Phiêu Lưu"],
-    },
-  ];
+import Image from "next/image";
+import Link from "next/link";
+
+export default function MoviesCardTrailer({ movie, isHovered }) {
+  if (!isHovered) return null;
 
   return (
-    <div className="bg-black min-h-screen p-8">
-      <div className="max-w-7xl mx-auto">
-        <h2 className="text-white text-2xl font-bold mb-6">Phim Đề Xuất</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
-          {movies.map((movie, idx) => (
-            <MovieCard key={idx} movie={movie} />
-          ))}
+    <div className="absolute top-0 left-0 w-[420px] z-50 rounded-2xl overflow-hidden shadow-2xl bg-[#0f1117]">
+      {/* BACKDROP */}
+      <div className="relative aspect-[16/9]">
+        <Image
+          src={movie.backdropUrl || movie.thumbUrl || movie.poster}
+          alt={movie.title}
+          fill
+          className="object-cover"
+          sizes="420px"
+          priority
+        />
+
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0f1117] via-[#0f1117]/60 to-transparent" />
+      </div>
+
+      {/* CONTENT */}
+      <div className="relative p-5 -mt-20">
+        {/* Title */}
+        <h3 className="text-white text-xl font-bold leading-tight">
+          {movie.title}
+        </h3>
+        <p className="text-yellow-400 text-sm mb-4">{movie.originalTitle}</p>
+
+        {/* Actions */}
+        <div className="flex items-center gap-3 mb-4">
+          <Link
+            href={`/movie/${movie.slug}`}
+            className="flex items-center gap-2 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-5 py-2.5 rounded-xl transition"
+          >
+            ▶ Xem ngay
+          </Link>
+
+          <button className="flex items-center gap-2 border border-white/30 text-white px-4 py-2.5 rounded-xl hover:bg-white/10 transition">
+            ❤ Thích
+          </button>
+
+          <Link
+            href={`/movie/${movie.slug}`}
+            className="flex items-center gap-2 border border-white/30 text-white px-4 py-2.5 rounded-xl hover:bg-white/10 transition"
+          >
+            ℹ Chi tiết
+          </Link>
         </div>
+
+        {/* Meta */}
+        <div className="flex items-center flex-wrap gap-3 text-sm mb-3">
+          {movie.rating && (
+            <span className="border border-yellow-400 text-yellow-400 px-2 py-1 rounded">
+              IMDb {movie.rating}
+            </span>
+          )}
+          {movie.ageRating && (
+            <span className="bg-white text-black font-bold px-2 py-1 rounded">
+              {movie.ageRating}
+            </span>
+          )}
+          {movie.releaseDate && (
+            <span className="text-gray-300">
+              {movie.releaseDate.slice(0, 4)}
+            </span>
+          )}
+          {movie.runtime && (
+            <span className="text-gray-300">{movie.runtime}m</span>
+          )}
+        </div>
+
+        {/* Genres */}
+        {movie.genres?.length > 0 && (
+          <div className="text-gray-300 text-sm">
+            {movie.genres.join(" • ")}
+          </div>
+        )}
       </div>
     </div>
   );
 }
-
-export default MovieCardDemo;

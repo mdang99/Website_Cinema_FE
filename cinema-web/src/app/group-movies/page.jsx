@@ -8,33 +8,18 @@ import Pagination from "@/components/pagination/Pagination";
 
 import useUrlFilters from "../../../hooks/useUrlFilter";
 import FilterModal from "@/components/filter/FilterModal";
-import FilterSort from "@/components/filter/FilterSort";
+import FilterSort, { defaultFilters } from "@/components/filter/FilterSort";
 
 export default function GroupMovies() {
   const itemsPerPage = 14;
-
-  /* ======================
-     URL FILTERS (SOURCE OF TRUTH)
-  ====================== */
   const { filters, updateFilters } = useUrlFilters();
-
-  /* ======================
-     LOCAL STATE
-  ====================== */
   const [currentPage, setCurrentPage] = useState(1);
   const [openFilter, setOpenFilter] = useState(false);
 
   // draftFilters CHỈ dùng cho modal
   const [draftFilters, setDraftFilters] = useState(defaultFilters);
-
-  /* ======================
-     DATA
-  ====================== */
   const movies = moviesListData.movies;
 
-  /* ======================
-     OPTIONS FOR FILTER UI
-  ====================== */
   const options = useMemo(
     () => ({
       country: [...new Set(movies.map((m) => m.country))],
