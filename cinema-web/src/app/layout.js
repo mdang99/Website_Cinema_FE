@@ -1,8 +1,10 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/layout/Navbar";
+
 import Footer from "@/components/layout/Footer";
 import { AuthProvider } from "@/context/AuthContext";
+import Navbar from "@/components/layout/Navbar";
+import ScrollToTop from "@/components/layout/ScrollToTop";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,8 +28,9 @@ export default function RootLayout({ children }) {
       <body className="bg-gradient-to-b from-black via-dark to-black text-white">
         <AuthProvider>
           <Navbar />
-          <main className="container mx-auto px-4 py-6">{children}</main>
+          <main className="mx-auto px-[20px] py-6">{children}</main>
           <Footer />
+          <ScrollToTop className="fixed bottom-6 right-6" />
         </AuthProvider>
       </body>
     </html>

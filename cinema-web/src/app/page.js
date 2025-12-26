@@ -1,60 +1,65 @@
-// src/app/page.jsx
-"use client";
-
+"use client"
+import homeData from "../../mockup-Data/homeData.json";
 import { useEffect, useState } from "react";
-import { useAuth } from "@/context/AuthContext";
-import RequireAuth from "@/components/common/RequireAuth";
-import { getVipMovies } from "@/services/movieApi";
-import MovieCard from "@/components/movie/MovieCard";
+import  "./page.module.css";
+import MovieCardsClip from "@/components/home/SoonMovies";
+import MoviesCateLayout from "@/components/home/MoviesCateLayout";
+import HeroBannerLayout from "@/components/home/HeroBannerLayout";
 
 export default function HomePage() {
-  const { accessToken, logout } = useAuth();
-  const [movies, setMovies] = useState([]);
-  const [loadingMovies, setLoadingMovies] = useState(true);
-
-   useEffect(() => {
-    async function fetchData() {
-      try {
-        const data = await getVipMovies(accessToken);
-        setMovies(data || []);
-      } catch (e) {
-        if (e.status === 401) {
-          logout();
-          router.replace("/login");
-        }
-      }
-    }
-    fetchData();
-  }, [accessToken]);
   
-  useEffect(() => {
-    async function fetchMovies() {
-      try {
-        const data = await getVipMovies(accessToken);
-        setMovies(data || []);
-      } catch (e) {
-        console.error(e);
-      } finally {
-        setLoadingMovies(false);
-      }
-    }
-    fetchMovies();
-  }, [accessToken]);
+  // useEffect(() => {
+  //   async function fetchMovies() {
+  //     try {
+  //       const data = await getVipMovies(accessToken); 
+  //       setMovies(data || []);
+  //     } catch (e) {
+  //       console.error(e);
+  //     } finally {
+  //       setLoadingMovies(false);
+  //     }
+  //   }
+  //   fetchMovies();
+  // }, [accessToken]);
 
   return (
-    <RequireAuth>
-      <section>
-        <h2 className="mb-4 text-xl font-bold">Phim VIP</h2>
-        {loadingMovies ? (
-          <p>Đang tải danh sách phim...</p>
-        ) : (
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-            {movies.map((m) => (
-              <MovieCard key={m.id} movie={m} />
-            ))}
-          </div>
-        )}
+    <>
+      {/* {loadingMovies ? (
+        <p>Đang tải danh sách phim...</p>
+      ) : (
+       <section>
+        <h2>Danh sách phim VIP</h2>
+         </section>
+      )} */}
+      <section className="hero-banner">
+        <HeroBannerLayout movies={homeData.comingSoon || []} />
       </section>
-    </RequireAuth>
+       <section className="movies-USA w-full">
+        <MoviesCateLayout 
+          catId="Phim Mỹ" 
+          movies={homeData.moviesByCountry.usa || []}
+        />
+      </section>
+       <section className="movies-Korea w-full">
+        <MoviesCateLayout 
+          catId="Phim Hàn" 
+          movies={homeData.moviesByCountry.korea || []}
+        />
+      </section>
+      <section className="movies-China w-full">
+        <MoviesCateLayout 
+          catId="Phim TQ" 
+          movies={homeData.moviesByCountry.china || []}
+        />
+      </section>
+      <section>
+
+      <MoviesCateLayout 
+          catId="Phim Mới" 
+          movies={homeData.comingSoon || []}
+        />
+        <MovieCardsClip movies={homeData.comingSoon || []}/>
+      </section>
+  </>
   );
 }
